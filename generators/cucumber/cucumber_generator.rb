@@ -9,7 +9,8 @@ class CucumberGenerator < Rails::Generator::Base
 
   attr_accessor :driver
   attr_accessor :framework
-  attr_reader :language, :template_dir
+  attr_reader :language, :template_dir 
+  attr_reader :rails_version  
   
   def initialize(runtime_args, runtime_options = {})
     super

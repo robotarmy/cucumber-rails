@@ -20,7 +20,8 @@ module Cucumber
       end
 
       # Creates templates
-      def create_templates(m = self, rails2 = false)
+      def create_templates(m = self, rails2 = false)  
+        @rails_version ||= (rails2 ? 2 : 3)
         m.template 'config/cucumber.yml.erb', 'config/cucumber.yml'
         if rails2        
           m.template 'environments/cucumber.rb.erb', 'config/environments/cucumber.rb'
@@ -28,8 +29,8 @@ module Cucumber
       end
 
       def configure_gemfile(m = self, rails2 = false)
-        require 'thor-ext'
         unless rails2   
+          require 'thor-ext'          
           puts "Update Rails 3 Gemfile for cucumber"     
           gsub_file 'Gemfile', /('|")gem/, "\1\ngem"
           add_gem('database_cleaner', '>=0.4.3') unless has_plugin? 'database_cleaner'
@@ -55,6 +56,7 @@ module Cucumber
             :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang]
           }
         else
+          puts "Update Rails 3 scripts"               
           m.copy_file 'script/cucumber', 'script/cucumber'
           m.chmod     'script/cucumber', 0755
         end
@@ -64,6 +66,7 @@ module Cucumber
         if rails2
           m.directory 'features/step_definitions'
         else
+          puts "Update Rails 3 step_definitions"                         
           m.empty_directory 'features/step_definitions'
         end
 
@@ -105,6 +108,7 @@ module Cucumber
         if rails2
           m.directory 'lib/tasks'
         else
+          puts "Rails 3 tasks"
           m.empty_directory 'lib/tasks'
         end
       
