@@ -1,6 +1,8 @@
 require 'webrat'
 require 'webrat/core/matchers'
 
+# Rails version: '<%= rails_version %>'
+
 Webrat.configure do |config|  
 <% if rails_version == 2 %>  
   config.mode = :rails
