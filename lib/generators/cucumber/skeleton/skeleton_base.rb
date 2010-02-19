@@ -21,10 +21,7 @@ module Cucumber
 
       # Creates templates
       def create_templates(m = self, rails2 = false)  
-        if !rails2          
-          puts "setting rails version = 3"
-          @rails_version = 3           
-        end
+        @rails_version = 3 if !rails2          
         puts "Using rails_version='#{rails_version}' (should be 2 or 3)"
         m.template 'config/cucumber.yml.erb', 'config/cucumber.yml'
         if rails2        
