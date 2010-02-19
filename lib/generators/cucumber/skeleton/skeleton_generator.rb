@@ -17,13 +17,14 @@ module Cucumber
       class_option :spork,        :type => :boolean, :desc => "Setup cucumber for use with Spork"    
       class_option :skip_database, :type => :boolean, :desc => "Use to skip database.yml", :aliases => '-D', :default => false        
     
-      attr_reader :framework, :driver
+      attr_reader :framework, :driver, :rails_version
     
       def configure_defaults
         @language ||= 'en'
         @framework  = framework_from_options || detect_current_framework || detect_default_framework
         @driver     = driver_from_options    || detect_current_driver    || detect_default_driver
-        @driver = 'webrat' if @driver.to_sym == :testunit
+        @driver = 'webrat' if @driver.to_sym == :testunit 
+        @rails_version = 2
       end
 
       def generate
