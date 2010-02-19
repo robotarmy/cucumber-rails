@@ -23,9 +23,11 @@ module Cucumber
         @language ||= 'en'
         @framework  = framework_from_options || detect_current_framework || detect_default_framework
         @driver     = driver_from_options    || detect_current_driver    || detect_default_driver
+        @driver = 'webrat' if @driver.to_sym == :testunit
       end
 
       def generate
+        puts "Generate Skeleton"
         check_upgrade_limitations
         create_templates
         create_scripts
