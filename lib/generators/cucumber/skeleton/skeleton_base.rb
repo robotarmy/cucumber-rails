@@ -22,7 +22,7 @@ module Cucumber
       # Creates templates
       def create_templates(m = self, rails2 = false)  
         @rails_version = 3 if !rails2          
-        puts "Using rails_version='#{rails_version}' (should be 2 or 3)"
+        # puts "Using rails_version='#{rails_version}' (should be 2 or 3)"
         m.template 'config/cucumber.yml.erb', 'config/cucumber.yml'
         if rails2        
           m.template 'environments/cucumber.rb.erb', 'config/environments/cucumber.rb'
@@ -32,7 +32,6 @@ module Cucumber
       def configure_gemfile(m = self, rails2 = false)
         unless rails2   
           require 'thor-ext'          
-          puts "Update Rails 3 Gemfile for cucumber"     
           gsub_file 'Gemfile', /('|")gem/, "\1\ngem"
           add_gem('database_cleaner', '>=0.4.3') unless has_plugin? 'database_cleaner'
           if driver == :capybara
@@ -41,13 +40,12 @@ module Cucumber
             add_gem('webrat', '>=0.6.0') unless has_plugin? 'webrat'
           end
           if framework == :rspec
-            add_gem('rspec', '>=1.3.0') unless has_plugin? 'rspec'
-            add_gem('rspec-rails', '>=1.3.2') unless has_plugin? 'rspec-rails'
+            add_gem('rspec-rails', '>=2.0.0') unless has_plugin? 'rspec-rails'
           end
           if spork?
-            add_gem('spork''>=0.7.5') unless has_plugin? 'spork'
-          end          
-          add_gems(%w{cucumber cucumber-rails})
+            add_gem('spork', '>=0.7.5') unless has_plugin? 'spork'
+          end                          
+          add_gem('cucumber-rails', '>=0.2.6')
         end
       end
 
@@ -57,7 +55,6 @@ module Cucumber
             :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang]
           }
         else
-          puts "Update Rails 3 scripts"               
           m.copy_file 'script/cucumber', 'script/cucumber'
           m.chmod     'script/cucumber', 0755
         end
@@ -67,7 +64,6 @@ module Cucumber
         if rails2
           m.directory 'features/step_definitions'
         else
-          puts "Update Rails 3 step_definitions"                         
           m.empty_directory 'features/step_definitions'
         end
 
@@ -79,7 +75,6 @@ module Cucumber
 
       def create_feature_support(m = self, rails2 = false)
         if rails2
-          puts "Rails 2 feature support"          
           m.directory 'features/support'
           m.file      'support/paths.rb', 'features/support/paths.rb'
           
@@ -91,7 +86,6 @@ module Cucumber
           end          
           
         else
-          puts "Rails 3 feature support"
           m.empty_directory 'features/support'
           m.copy_file 'support/paths.rb', 'features/support/paths.rb'
           
@@ -109,7 +103,6 @@ module Cucumber
         if rails2
           m.directory 'lib/tasks'
         else
-          puts "Rails 3 tasks"
           m.empty_directory 'lib/tasks'
         end
       
