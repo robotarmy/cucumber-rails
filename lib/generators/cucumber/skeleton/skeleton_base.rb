@@ -80,9 +80,9 @@ module Cucumber
           
           # spork
           if spork?
-            m.template 'support/rails_spork.rb.erb', 'features/support/env.rb'
+            m.template 'support/rails2/env_spork.rb.erb', 'features/support/env.rb'
           else
-            m.template 'support/rails.rb.erb',       'features/support/env.rb'
+            m.template 'support/rails2/env.rb.erb',       'features/support/env.rb'
           end          
           
         else
@@ -90,9 +90,9 @@ module Cucumber
           m.copy_file 'support/paths.rb', 'features/support/paths.rb'
           
           if spork?
-            m.template 'support/rails3_spork.rb.erb', 'features/support/env.rb'
+            m.template 'support/rails3/env_spork.rb.erb', 'features/support/env.rb'
           else
-            m.template 'support/rails3.rb.erb',       'features/support/env.rb'
+            m.template 'support/rails3/env.rb.erb',       'features/support/env.rb'
           end          
           
         end
