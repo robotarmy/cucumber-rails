@@ -6,7 +6,7 @@ unless defined?(Test)
 end
 
 if defined?(ActiveRecord::Base)
-  require 'test_help' 
+  require 'rails/test_help' 
 else
   # I can't do rescue LoadError because in this files could be loaded
   # from rails gem (ie. load actionpack 2.3.5 if rubygems are not disabled)
