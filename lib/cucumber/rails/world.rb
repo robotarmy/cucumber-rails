@@ -1,6 +1,6 @@
-unless defined?(Test)
+unless defined?(RSpec)
   begin
-    require 'spec/test/unit'
+    require 'rspec/rspec'
   rescue LoadError => ignore_if_rspec_not_installed
   end
 end
