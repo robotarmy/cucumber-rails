@@ -1,10 +1,3 @@
-unless defined?(RSpec)
-  begin
-    require 'rspec/rspec'
-  rescue LoadError => ignore_if_rspec_not_installed
-  end
-end
-
 if defined?(ActiveRecord::Base)
   require 'rails/test_help' 
 else

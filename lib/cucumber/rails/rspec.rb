@@ -1,5 +1,6 @@
 require 'cucumber/rails/world'
 require 'rspec/expectations'
+require 'rspec/rspec'
 require 'rspec/rails'
 
 [Cucumber::Rails::World, ActionController::Integration::Session].each do |klass|
